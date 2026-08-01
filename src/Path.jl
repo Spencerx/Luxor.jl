@@ -481,3 +481,77 @@ function pathsample(path::Path, spacing;
     end
     return Path(newpath)
 end
+
+"""
+    movepath(path::Path, pt::Point)
+
+Return a new Path by moving every point in `path` by 
+`pt.x` and `pt.y`.
+"""
+function movepath(path::Path, pt::Point)
+    op = Path(PathElement[])
+    for p in path
+        if p isa PathMove
+            push!(op.path, PathMove(Point(p.pt1.x + pt.x, p.pt1.y + pt.y)))
+        elseif p isa PathLine
+            push!(
+                op.path, PathLine(
+                    Point(p.pt1.x + pt.x, p.pt1.y + pt.y),
+                )
+            )
+        elseif p isa PathCurve
+            push!(
+                op.path, PathCurve(
+                    Point(p.pt1.x + pt.x, p.pt1.y + pt.y),
+                    Point(p.pt2.x + pt.x, p.pt2.y + pt.y),
+                    Point(p.pt3.x + pt.x, p.pt3.y + pt.y),
+                )
+            )
+        elseif p isa PathClose
+            push!(op.path, PathClose())
+        end
+    end
+    return op
+end
+
+"""
+    scalepath(path::Path, s)
+
+Return a new Path by rescaling every point in `path` by `s`.
+Origin of the scaling operation is the center of the 
+bounding box of `path`.
+"""
+function scalepath(path::Path, s)
+    op = Path(PathElement[])
+    cog = boxmiddlecenter(BoundingBox(path))
+    @show cog
+    for p in path
+        if p isa PathMove
+            push!(op.path, 
+                PathMove(
+                    Point(cog.x + (p.pt1.x - cog.x) * s, 
+                          cog.y + (p.pt1.y - cog.y) * s))
+                          )
+        elseif p isa PathLine
+            push!(op.path, 
+                PathLine(
+                    Point(cog.x + (p.pt1.x - cog.x) * s, 
+                          cog.y + (p.pt1.y - cog.y) * s))
+                )
+        elseif p isa PathCurve
+            push!(
+                op.path, PathCurve(
+                    Point(cog.x + (p.pt1.x - cog.x) * s, 
+                          cog.y + (p.pt1.y - cog.y) * s),
+                    Point(cog.x + (p.pt2.x - cog.x) * s, 
+                          cog.y + (p.pt2.y - cog.y) * s),
+                    Point(cog.x + (p.pt3.x - cog.x) * s, 
+                          cog.y + (p.pt3.y - cog.y) * s),
+                )
+            )
+        elseif p isa PathClose
+            push!(op.path, PathClose())
+        end
+    end
+    return op
+end

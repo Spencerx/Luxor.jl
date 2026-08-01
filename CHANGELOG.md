@@ -4,6 +4,9 @@
 
 ### Added
 
+- `movepath()`
+- `scalepath()`
+
 ### Changed
 
 - fixed some method ambiguities that Julia nightly 14 1.14.0-DEV.2604

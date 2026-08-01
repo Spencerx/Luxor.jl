@@ -173,7 +173,8 @@ export Drawing,
     # paths
     Path, PathClose, PathCurve, PathElement, PathLine,
     PathMove, bezierpathtopath, drawpath, storepath,
-    polytopath, pathlength, pathsample, setfillrule, getfillrule,
+    polytopath, pathlength, pathsample, movepath, scalepath,
+    setfillrule, getfillrule,
 
     # experimental
     tidysvg,
