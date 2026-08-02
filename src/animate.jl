@@ -1,4 +1,6 @@
 """
+    Movie
+
 The `Movie` and `Scene` types and the `animate()` function are designed to help you
 create the frames that can be used to make an animated GIF or movie.
 
@@ -53,6 +55,8 @@ function lineartween(t, b, c, d)
 end
 
 """
+    Scene
+
 The Scene type defines a function to be used to render a range of frames in a movie.
 
 - the `movie` created by Movie()

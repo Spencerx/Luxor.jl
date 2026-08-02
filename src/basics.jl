@@ -64,7 +64,6 @@ julia> rescale(15, (0, 100), (1000, 0))
 The function provides linear interpolation; but you can pass an
 easing function to the `easingfunction` keyword.
 """
-
 function rescale(x, from_min, from_max, to_min = 0.0, to_max = 1.0;
         easingfunction=easingflat)
     t = (x - from_min) / (from_max - from_min)
@@ -282,7 +281,7 @@ current path and then clearing the current path.
 
 An existing clipping region is enforced through and after a
 `gsave()`-`grestore()` block, but a clipping region set inside a
-`gsave()`-`grestore()` block is lost after `grestore()`. [?]
+`gsave()`-`grestore()` block is lost after `grestore()`.
 """
 clip() = clip(DISPATCHER[1])
 clip(::DefaultLuxor) = Cairo.clip(_get_current_cr())
@@ -503,6 +502,12 @@ function line(pt1::Point, pt2::Point;
     do_action(action)
 end
 
+"""
+    line(pt1::Point, pt2::Point, action::Symbol)
+
+Construct a new path consisting of a line from `pt1` to `pt2`. Then apply `action`
+(`:stroke` is a sensible choice).
+"""
 line(pt1::Point, pt2::Point, action::Symbol) = line(pt1, pt2, action = action)
 
 """

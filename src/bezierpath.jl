@@ -1,4 +1,6 @@
 """
+    BezierPathSegment
+
 BezierPathSegment is an array of four points:
 
 - `p1`  - start point

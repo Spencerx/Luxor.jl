@@ -4,6 +4,8 @@ import Base: isequal, isless, isapprox, cmp, size, getindex, broadcastable
 abstract type AbstractPoint end
 
 """
+    Point
+
 The Point type holds two coordinates. It's immutable, you can't
 change the values of the x and y values directly.
 """

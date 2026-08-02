@@ -156,13 +156,14 @@ constructing a path.
 
 ## Path objects
 
-Sometimes it's useful to be able to store a path, rather
-than just construct it on the drawing. It might also be
-useful to draw it later, under different circumstances, and
+Sometimes it's useful to be able to create a path and save it for future use, rather
+than just construct it on the drawing. It might be
+useful to draw it later with different settings, and
 perhaps more than once. To do this, you can use the `storepath()`
-and `drawpath()` functions.
+and `drawpath()` functions. And you can do some limited modifications 
+of a stored path using `movepath()` and `scalepath()`.
 
-Consider this code that uses `storepath()`:
+This code creates that uses `storepath()`:
 
 ```julia
 move(Point(-220, 50))
@@ -173,7 +174,7 @@ box(O, 100, 100, :path)
 move(Point(180, 0) + polar(40, 0)) # pt on circumference
 circle(Point(180, 0), 40, :path)
 
-pathexample # save Path
+pathexample = storepath() # store the path
 ```
 
 `pathexample` now contains the path, stored in a Luxor object of type `Path`. The current path is still present.

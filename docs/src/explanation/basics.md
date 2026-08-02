@@ -209,7 +209,7 @@ nothing # hide
 
 # Save and restore: layers and state
 
-[`gsave`](@ref) saves a copy of the current graphics settings (current axis rotation, position, scale, line and text settings, color, and so on). When the next [`grestore`](@ref) is called, all changes you've made to the graphics settings will be discarded, and the previous settings are restored, so things return to how they were when you last used [`gsave`](@ref). [`gsave`](@ref) and [`grestore`](@ref) should always be balanced in pairs, enclosing the functions.
+[`gsave`](@ref) saves a copy of the current graphics settings (current axis rotation, position, scale, line and text settings, color, clipping path, and so on). When the next [`grestore`](@ref) is called, all changes you've made to the graphics settings will be discarded, and the previous settings are restored, so things return to how they were when you last used [`gsave`](@ref). [`gsave`](@ref) and [`grestore`](@ref) should always be balanced in pairs, enclosing the functions.
 
 ```julia
 @svg begin

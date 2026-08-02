@@ -712,6 +712,10 @@ end
         leading = 12,
         linefunc::Function = (linenumber, linetext, startpos, height) -> (),
         alignment=:left)
+
+Draw the strings in the array `lines` vertically downwards. `leading` controls
+the spacing between each line (default 12), and `alignment` determines the
+horizontal alignment (default `:left`).
 """
 textbox(s::T where {T<:AbstractString}, pos::Point=O; kwargs...) = textbox([s], pos; kwargs...)
 

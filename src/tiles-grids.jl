@@ -562,6 +562,8 @@ getcells(t::Table, n::Int) = [(t[n], n)] # array of tuples
 getcells(t::Tiler, n::Int) = [(t[n])] # array of tuples
 
 """
+    EquilateralTriangleGrid
+
 An EquilateralTriangleGrid is an iterator that makes a grid of equilateral
 triangles with side length `side` positioned on a rectangular grid with `nrows`
 and `ncols`.

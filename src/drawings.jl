@@ -577,10 +577,10 @@ const paper_sizes = Dict{String,Tuple}(
     "E"      => (3168, 2448))
 
 """
+    Drawing(width=600, height=600, file="luxor-drawing.png")
+
 Create a new drawing, and optionally specify file type (PNG, PDF, SVG, EPS),
 file-based or in-memory, and dimensions.
-
-    Drawing(width=600, height=600, file="luxor-drawing.png")
 
 # Extended help
 

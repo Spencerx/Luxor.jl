@@ -122,11 +122,13 @@ end
 """
     blendadjust(ablend, center::Point, xscale, yscale, rot=0)
 
-Modify an existing blend by scaling, translating, and rotating it so that it will fill a
+Modify an existing blend.
+
+You can scale it, translate it, and rotate it so that it will fill a
 shape properly even if the position of the shape is nowhere near the original location of
 the blend's definition.
 
-For example, if your blend definition was this (notice the `1`)
+For example, if your blend definition was this (notice the `1`):
 
 ```julia
 blendgoldmagenta = blend(

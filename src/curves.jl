@@ -166,6 +166,14 @@ function circlering(o_center, o_radius, count = 3)
     return (circles, (o_center, innerradius - circleradius))
 end
 
+"""
+    ellipse(xc::Real, yc::Real, w::Real, h::Real;
+    action = :none)
+
+Construct an ellipse centered at `Point(xc, yc), 
+width `w` and height `h`.
+
+"""
 function ellipse(xc::Real, yc::Real, w::Real, h::Real;
     action = :none)
     x = xc - w / 2
@@ -187,6 +195,13 @@ function ellipse(xc::Real, yc::Real, w::Real, h::Real;
     return (Point(xc, yc) - (w / 2, h / 2), Point(xc, yc) + (w / 2, h / 2))
 end
 
+"""
+    ellipse(xc::Real, yc::Real, w::Real, h::Real, action)
+
+Construct an ellipse centered at `Point(xc, yc), 
+width `w` and height `h` and apply `action`.
+
+"""
 ellipse(xc::Real, yc::Real, w::Real, h::Real, action::Symbol) =
     ellipse(xc, yc, w, h, action = action)
 
@@ -194,7 +209,8 @@ ellipse(xc::Real, yc::Real, w::Real, h::Real, action::Symbol) =
     ellipse(centerpoint::Point, w, h; action=:none)
     ellipse(centerpoint::Point, w, h; action)
 
-Make an ellipse, centered at `centerpoint`, with width `w`, and height `h`, and add it to the current path.
+Make an ellipse, centered at `centerpoint`, with width `w`,
+and height `h`, and add it to the current path.
 
 Returns a tuple of two points, the corners of a bounding box that encloses the ellipse.
 
@@ -600,6 +616,10 @@ pie(centerpoint::Point, radius::Real, startangle::Real, endangle::Real; action =
 
 """
     pie(centerpoint::Point, radius::Real, startangle::Real, endangle::Real, action::Symbol)
+
+Make a pie shape centered at `centerpoint`. Angles start at the positive x-axis and
+are measured clockwise, and add it to the current path.
+
 """
 pie(centerpoint::Point, radius::Real, startangle::Real, endangle::Real, action::Symbol) =
     pie(centerpoint.x, centerpoint.y, radius, startangle, endangle, action = action)
@@ -720,11 +740,11 @@ circlepath(center::Point, radius, action::Symbol; reversepath = false, kappa = 0
             vertices=false,
             reversepath=false)
 
-Build a polygon approximation to an ellipse, given two
-points and a distance, `k`, which is the sum of the
-distances to the focii of any points on the ellipse (or the
-shortest length of string required to go from one focus to
-the perimeter and on to the other focus), and add it to the
+Build a polygon that's an approximation to an ellipse. 
+The distance, `k` is the sum of the
+distances to the two focus points of the ellipse (`focus1` and `focus2`).
+or the shortest length of string required to go from one focus to
+the perimeter and on to the other focus, and add it to the
 current path.
 """
 function ellipse(focus1::Point, focus2::Point, k;
@@ -1523,6 +1543,16 @@ function crescent(cp1::Point, r1::Real, cp2::Point, r2::Real;
     end
 end
 
+"""
+    crescent(cp1::Point, r1::Real, cp2::Point, r2::Real, action::Symbol;
+        vertices = false,
+        reversepath = false)
+
+Create a crescent-shaped polygon, aligned with the current
+x-axis, by finding the intersection of two circles, then add
+it to the current path. The two center positions should be
+different.
+"""
 crescent(cp1::Point, r1::Real, cp2::Point, r2::Real, action::Symbol;
     vertices = false,
     reversepath = false) = crescent(cp1, r1, cp2, r2;

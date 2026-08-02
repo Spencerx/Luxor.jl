@@ -6,7 +6,7 @@ Set the current color to a named color. This use the definitions in Colors.jl to
 string to RGBA eg `setcolor("gold")` or "green", "darkturquoise", "lavender", etc. The list
 is at `Colors.color_names`.
 
-Use `sethue()` for changing colors without changing current opacity level.
+Use `sethue(...)` for changing colors without changing current opacity level.
 
 `sethue()` and `setcolor()` return the three or four values that were used:
 
@@ -69,6 +69,8 @@ function setcolor(r, g, b, a = 1.0)
 end
 
 """
+    @setcolor
+
 Set the current color to a string using a macro.
 
 For example:
@@ -124,7 +126,8 @@ end
 """
     sethue(0.3, 0.7, 0.9)
 
-Set the color's `r`, `g`, `b` values. Use `setcolor(r, g, b, a)` to set transparent colors.
+Set the current color's `r`, `g`, `b` values, keeping the current alpha transparency value.
+Use `setcolor(r, g, b, a)` to set transparent colors.
 """
 function sethue(r, g, b)
     _set_current_color(r, g, b)

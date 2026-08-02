@@ -17,6 +17,8 @@ struct PathClose end
 const PathElement = Union{PathCurve,PathMove,PathLine,PathClose}
 
 """
+    Path
+
 A Path object contains, in the `.path` field, a vector of
 `PathElement`s (`PathCurve`, `PathMove`, `PathLine`,
 `PathClose`) that describe a Cairo path. Use `drawpath()` to
@@ -414,6 +416,15 @@ function drawpath(path::Path, k::Real;
     do_action(action)
     return mostrecentpoint
 end
+
+"""
+    drawpath(path::Path, k::Real, action::Symbol)
+
+Construct the path in `path` starting at the beginning and
+stopping at `k` between 0 and 1. So if `k` is 0.5, half the
+path is drawn. Then apply the `action`. Starts a new path.
+
+"""
 drawpath(path::Path, k::Real, act::Symbol;
     steps = 10, # used when approximating Bezier curve segments
     startnewpath = true,
@@ -524,7 +535,6 @@ bounding box of `path`.
 function scalepath(path::Path, s)
     op = Path(PathElement[])
     cog = boxmiddlecenter(BoundingBox(path))
-    @show cog
     for p in path
         if p isa PathMove
             push!(op.path, 

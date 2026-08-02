@@ -8,6 +8,8 @@ function Base.show(io::IO, bbox::BoundingBox)
 end
 
 """
+    BoundingBox()
+
 `BoundingBox()` with no arguments returns a BoundingBox that
 includes the current drawing.
 

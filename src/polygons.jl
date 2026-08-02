@@ -258,6 +258,20 @@ function prettypoly(pointlist::Vector{Point}, vertexfunction = () -> circle(O, 2
 end
 
 # method with action as argument
+"""
+    prettypoly(pointlist::Vector{Point}, action::Symbol, vertexfunction = () -> circle(O, 2, :stroke);
+        close = false,
+        reversepath = false,
+        vertexlabels = (n, l) -> ()) = prettypoly(pointlist, vertexfunction,
+        action = action,
+        close = close,
+        reversepath = reversepath,
+        vertexlabels = vertexlabels)
+
+Build the polygon defined by `points` and `action`, possibly closing and reversing it, using the current
+parameters, and then evaluate the `vertexfunction` function at every vertex of the polygon.
+
+"""
 prettypoly(pointlist::Vector{Point}, action::Symbol, vertexfunction = () -> circle(O, 2, :stroke);
     close = false,
     reversepath = false,

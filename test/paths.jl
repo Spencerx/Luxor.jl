@@ -139,5 +139,35 @@ function path_test_2(fname)
 
 end
 
+
+function path_test_3(fname)
+    Drawing(800, 800, fname)
+    background("black")
+    origin()
+    newpath()
+    background("black")
+    setline(0.5)
+    box(O, 100, 100, :path)
+    move(polar(50, 0))
+    circle(O, 50, :path)
+
+    path = storepath()
+
+    grid = first.(Tiler(600, 600, 5, 5))
+
+    for i in 1:25
+        randomhue()
+        drawpath(movepath(path, grid[i]), :stroke)
+        @layer begin
+            translate(grid[i])
+            for i in 1:0.5:5
+                @show 0.2i
+                drawpath(scalepath(path, .2i), :stroke)
+            end
+        end
+    end
+    @test finish() == true
+end
 path_test_1("path-test-1.png")
 path_test_2("path-test-2.png")
+path_test_3("path-test-3.svg")

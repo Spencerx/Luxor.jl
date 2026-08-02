@@ -1311,8 +1311,10 @@ for θ in range(0, step=2π/10, length=10)
         drawpath(dagger, action = :fill)
     end
 end
-end # hide
+end 800 600 # hide
 ```
+
+
 
 !!! note
 
@@ -1329,7 +1331,33 @@ Other functions for working with stored paths include:
 
 - [`pathlength`](@ref) find the length of a stored path
 
+- [`movepath`](@ref) move the stored coordinates of the path
+
+- [`scalepath`](@ref) scale the path around its center
+
 - [`BoundingBox`](@ref) find the bounding box of a stored path
+
+
+```@example gpath
+@drawsvg begin # hide
+background("black")
+
+dagger1 = scalepath(dagger, 0.5)
+
+dagger2 = movepath(dagger1, Point(0, 100))
+
+for θ in range(0, step=2π/15, length=15)
+    @layer begin
+        rotate(θ)
+        translate(240, 0)
+        rotate(π/2)
+        sethue(Luxor.Colors.Oklch(0.8, 0.3, rescale(θ, 0, 2π, 0, 360)))
+        drawpath(dagger1, action = :fill)
+        drawpath(dagger2, action = :fill)
+    end
+end
+end 800 500 # hide
+```
 
 ## Julia logos
 

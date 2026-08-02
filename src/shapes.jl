@@ -299,7 +299,10 @@ box(centerpoint::Point, width, height, cornerradii::Array, action::Symbol) =
         vertices = false,
         reversepath = false)
 
-Draw a regular polygon centered at point `Point(x,y)`.
+Construct a regular polygon centered at point `Point(x,y)` with `sides` sides 
+and radius `radius`, oriented by `orientation` radians. The default action is `:none`,
+(ie just build the path). If `vertices` is true, the function returns a list of the
+coordinates of each vertex, rather than construct a path.
 """
 function ngon(x::Real, y::Real, radius::Real, sides::Int=5, orientation=0.0;
             action=:none,
@@ -317,9 +320,25 @@ function ngon(x::Real, y::Real, radius::Real, sides::Int=5, orientation=0.0;
     end
 end
 
+"""
+    ngon(x::Real, y::Real, radius::Real, sides::Int, action::Symbol)
+
+Construct a regular polygon centered at point `Point(x,y)` with `sides` sides 
+and radius `radius`. The default action is `:none`,
+(ie just build the path). If `vertices` is true, the function returns a list of the
+coordinates of each vertex, rather than construct a path.
+"""
 ngon(x::Real, y::Real, radius::Real, sides::Int, action::Symbol) =
     ngon(x, y, radius, sides, action=action, vertices=false, reversepath=false)
 
+"""
+    ngon(x::Real, y::Real, radius::Real, sides::Int, orientation::Real, action::Symbol)
+
+Construct a regular polygon centered at point `Point(x,y)` with `sides` sides 
+and radius `radius`, oriented by `orientation` radians, and apply `action`.
+If `vertices` is true, the function returns a list of the
+coordinates of each vertex, rather than construct a path.
+"""
 ngon(x::Real, y::Real, radius::Real, sides::Int, orientation::Real, action::Symbol) =
     ngon(x, y, radius, sides, orientation, action=action, vertices=false, reversepath=false)
 
@@ -363,6 +382,15 @@ ngon(centerpoint::Point, radius, sides::Int=5, orientation=0.0;
 # action as argument
 
 # this is a bit untidy?
+"""
+    ngon(centerpoint::Point, radius::Real, sides::Int, orientation::Real, action::Symbol;
+        vertices=false, reversepath=false)
+
+Construct a regular polygon centered at `centerpoint` with `sides` sides 
+and radius `radius`, oriented by `orientation` radians, and apply `action`.
+If `vertices` is true, the function returns a list of the
+coordinates of each vertex, rather than construct a path.
+"""
 ngon(centerpoint::Point, radius::Real, sides::Int, orientation::Real, a::Symbol;
         action=:none, vertices=false, reversepath=false) = ngon(centerpoint, radius, sides, orientation,
         action=a, vertices=vertices, reversepath=reversepath)

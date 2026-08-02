@@ -1,5 +1,6 @@
 using Documenter, Luxor
 using DocumenterTools: Themes
+using DocumenterCodeBlocks
 
 # Setup for doctests in docstrings
 DocMeta.setdocmeta!(Luxor, :DocTestSetup, :(using Luxor))
@@ -9,6 +10,7 @@ println("Starting makedocs")
 makedocs(
     modules  = [Luxor],
     sitename = "Luxor",
+    plugins = [CodeBlocks()],
     warnonly = true,
     format   = Documenter.HTML(
         size_threshold = nothing,
