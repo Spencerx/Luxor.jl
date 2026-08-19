@@ -16,7 +16,7 @@ hero:
   actions:
     - theme: brand
       text: Tutorial
-      link: /tutorial/helloworld.html
+      link: /tutorial/helloworld
     - theme: alt
       text: View on GitHub
       link: https://github.com/JuliaGraphics/Luxor.jl
@@ -33,7 +33,7 @@ features:
       wrap: true
     title: Colorful drawings
     details: "With Luxor you can make all kinds of drawings with vector and pixel graphics, static illustrations, diagrams, generative artworks, and simple animations, using colored fills, strokes, patterns, blends, and gradient meshes. There are turtles too, if you like exploring Turtle Graphics."
-    link: /tutorial/helloworld.html
+    link: /tutorial/helloworld
   - icon:
       light: /figures/icon-2.svg
       dark: /figures/icon-2.svg
@@ -49,7 +49,7 @@ features:
       wrap: true
     title: Text
     details: "Luxor's text handling allows for custom fonts, text alignment, text-on-a-path, and precise placement, useful for annotated diagrams, posters, and typographic experiments in addition to pure geometric art. You can add text to drawings using the LaTEX and Typst text engines."
-    link: /howto/text.html
+    link: /howto/text
   - icon:
       light: /figures/icon-4.svg
       dark: /figures/icon-4.svg
@@ -65,7 +65,7 @@ features:
       wrap: true
     title: Pixels and noise
     details: "Luxor lets you add pixel-based graphics to drawings, and you can interact with Julia's images-processing package Images.jl. You can freely mix pixel images and vector graphics, and there's noise generation tools too, for making graphics based on procedural noise."
-    link: /howto/images.html
+    link: /howto/images
   - icon:
       light: /figures/icon-6.apng
       dark: /figures/icon-6.apng
@@ -73,7 +73,7 @@ features:
       wrap: true
     title: Output
     details: "You can export drawings to multiple formats, including PNG, SVG, PDF, and EPS, and Luxor integrates well with Jupyter/Pluto notebooks for inline previews. Animations can be exported as animated GIFs and MP4 movies."
-    link: /howto/createdrawings.html
+    link: /howto/createdrawings
 ---
 ```
 
