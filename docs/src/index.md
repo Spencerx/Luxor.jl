@@ -41,7 +41,7 @@ features:
       wrap: true
     title: Graphical toolbox
     details: "Luxor provides lots of graphic primitives: lines, rectangles, circles, ellipses, arcs, polygons, Bézier curves, squircles, hypotrochoids, stars, crescents, pies, sectors, plus options for filling, stroking, clipping, and blending shapes. You can build up complex compositions using coordinate transformations (translation, rotation, and scaling) and Boolean operations."
-    link: /howto/simplegraphics.html
+    link: /howto/simplegraphics
   - icon:
       light: /figures/icon-3.svg
       dark: /figures/icon-3.svg
@@ -57,7 +57,7 @@ features:
       wrap: true
     title: Layout
     details: "Luxor includes features for common layout tasks, such as arranging objects in grids and tables, creating tiling patterns, and computing point arrangements along paths."
-    link: /howto/tables-grids.html
+    link: /howto/tables-grids
   - icon:
       light: /figures/icon-5.png
       dark: /figures/icon-5.png
