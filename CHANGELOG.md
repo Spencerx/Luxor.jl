@@ -3,839 +3,586 @@
 ## [v4.6] - forthcoming
 
 ### Added
-
 - `movepath()`
 - `scalepath()`
 
 ### Changed
+- Fixed method ambiguities that Julia nightly 1.14.0-DEV.2604 introduced, and that Aqua started finding.
 
-- fixed some method ambiguities that Julia nightly 14 1.14.0-DEV.2604
-  introduced and that Aqua started finding.
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.5] - 2026-04-09
 
 ### Added
-
-- easing functions for `rescale()`
+- Easing functions for `rescale()`
 
 ### Changed
+- Compat entry for PolygonAlgorithms 0.4
 
-- compat for PolygonAlgorithms 0.4
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.4.1] - 2026-01-25
 
-### Added
-
 ### Changed
+- Compat entry for PolygonAlgorithms
+- Colorant parsing in `mesh.jl`
 
-- compat entry for PolygonAlgorithms
-- colorant parsing in mesh.jl
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.4] - 2025-11-08
 
 ### Added
-
-- roundcorner()
+- `roundcorner()`
 
 ### Changed
+- Compat entries
 
-- compat entries
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.3] - 2025-05-17
 
 ### Added
-
-- `text(ts::TypstString, pos::Point)` and 
-  `render_typst_document(ts::TypstString)` use Typstry.jl for text typesetting.
+- `text(ts::TypstString, pos::Point)` and `render_typst_document(ts::TypstString)`, using Typstry.jl for text typesetting
 
 ### Changed
+- Minimum Julia version raised to 1.10+
 
-- Julia 1.10+ 
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.2] - 2025-02-21
 
 ### Added
-
 - `polyxor()`, `polydifference()`, `polyunion()`
 
-### Changed
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.1] - 2024-07-31
 
 ### Added
-
-- triangular grids
+- Triangular grids
 - `squirclepath()`
 - `rule(pt1, pt2)`
 - `polysidelengths()`
 
-### Changed
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v4.0] - 2024-04-15
 
-### This is a breaking release compared with v3.8
+**Breaking release compared with v3.8.**
 
-Some 'invalid' `Point` methods have been removed:
-
-- Broadcasting on xy-elements like `Point(x, y) .+ n` are no longer valid. Use `Point(x, y) + Point(n, n)`.
-
+Some "invalid" `Point` methods have been removed:
+- Broadcasting on xy-elements like `Point(x, y) .+ n` is no longer valid. Use `Point(x, y) + Point(n, n)`.
 - `Point`-`Real` arithmetic operations such as `Point(x, y) + n` are also no longer valid.
 
-LaTeX support is still under development. 
-See https://github.com/JuliaGraphics/Cairo.jl/pull/357.
+LaTeX support is still under development. See [JuliaGraphics/Cairo.jl#357](https://github.com/JuliaGraphics/Cairo.jl/pull/357).
 
 ### Added
-
 - `textformat()`
-- `polysmooth()` has `close` option
+- `polysmooth()` has a `close` option
 - `markcells()` and `getcells()`
-- use package extension for LaTeX support
-- add CompatHelper git workflow
-- add Aqua.jl testing
+- Package extension used for LaTeX support
+- CompatHelper GitHub workflow added
+- Aqua.jl testing added
 - `createmovie` option for `animate` to make MKV and MP4 videos
 - `polybspline` draws bspline polygons
 
 ### Changed
-
-- minimum Julia version 1.9
-- fixes for `drawpath(p, f)` to do the Bezier curve truncation better
-- added dependency PolygonAlgorithms.jl and replace poly intersection routines with new ones
-- Aqua says TOML deps must be in alphabetical order :) 
-- remove @assert statements
-- documents now built to https://github.com/JuliaGraphics/LuxorManual
-- fixed bug in `box(pt, w, h, cr, :path)` (don't create new path)
-- removed some invalid Point methods (#294)
+- Minimum Julia version 1.9
+- Fixes for `drawpath(p, f)` to do Bezier curve truncation better
+- Added dependency on PolygonAlgorithms.jl and replaced poly intersection routines
+- TOML deps reordered alphabetically per Aqua
+- Removed `@assert` statements
+- Documentation now built at [JuliaGraphics/LuxorManual](https://github.com/JuliaGraphics/LuxorManual)
+- Fixed bug in `box(pt, w, h, cr, :path)` (no longer creates a new path)
+- Removed some invalid `Point` methods (#294)
 - `between` has more methods for ranges and arrays
 
 ### Removed
+- Invalid `Point` methods such as `Point(1, 3) + 6` or `Point(1, 3) .+ 4`
 
-- invalid `Point` methods such as `Point(1, 3) + 6` or `Point(1, 3) .+ 4`
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v3.8.0] - 2023-09-08
 
-LaTeX support is still under development. 
-See https://github.com/JuliaGraphics/Cairo.jl/pull/357.
+LaTeX support is still under development. See [JuliaGraphics/Cairo.jl#357](https://github.com/JuliaGraphics/Cairo.jl/pull/357).
 
 ### Added
-
-- `setfillrule()`, access Cairo's fill rule parameter
-- `getfillrule()` ...
-- `circlering()`, creates ring of circles inside a circle
+- `setfillrule()` / `getfillrule()`, access Cairo's fill rule parameter
+- `circlering()`, creates a ring of circles inside a circle
 - `polysuper()`, creates superellipse-based polygons
-- `tidysvg(fromfile, tofile)`, munge those SVG glyphs
+- `tidysvg(fromfile, tofile)`, munges SVG glyphs
 - `placeeps()`, place EPS files
-- dependency on DataStructures.jl added 
+- Dependency on DataStructures.jl added
 
 ### Changed
+- Reorganized the benchmarks folder
+- `circle()` constructed more carefully with four arcs (thanks @hyrodium, #268)
+- Point arithmetic fix (thanks @j-maffe, #270)
 
-- rejigged benchmarks folder a bit
-- `circle()` constructed more carefully with four arcs (thanks @hyrodium) #268
-- Point arithmetic fix #270 (thanks @j-maffe)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v3.7.0] - 2023-02-04
 
-LaTeX support is still under development. 
-See https://github.com/JuliaGraphics/Cairo.jl/pull/357.
+LaTeX support is still under development. See [JuliaGraphics/Cairo.jl#357](https://github.com/JuliaGraphics/Cairo.jl/pull/357).
 
 ### Added
-
-- code to handle svg backgrounds (thanks @oheil and @hustf!) 
-  https://github.com/JuliaGraphics/Luxor.jl/issues/150
-
+- Code to handle SVG backgrounds (thanks @oheil and @hustf, [#150](https://github.com/JuliaGraphics/Luxor.jl/issues/150))
 - `getline()` gets current line width
-
 - `getcolor()` gets current color
-
--  multiply Point by 3×3 matrix using `*`
+- Multiply `Point` by a 3×3 matrix using `*`
 
 ### Changed
+- Added more information to docstrings and tutorials
 
-- added more information to doc strings and tutorials
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v3.6.0] - 2022-12-11
 
-LaTeX support is still under development. 
-See https://github.com/JuliaGraphics/Cairo.jl/pull/357.
+LaTeX support is still under development. See [JuliaGraphics/Cairo.jl#357](https://github.com/JuliaGraphics/Cairo.jl/pull/357).
 
 ### Added
-
 - `bezigon()`
-- the `Base.show(f::IO, ::MIME"image/svg+xml")` method that displays SVGs in notebooks modifies the glyph ids to avoid the familiar "Jupyter cells leak" problem (described [here](https://github.com/MakieOrg/Makie.jl/issues/952#issuecomment-842413678))
-- `polyclip()` clips one poly with another convex polygon
-- `ispointonleftonline()` used by ↑
-- `rotatepoint()` is better name for `rotate_point_around_point()` (thanks @gantz-giraffe !)
+- `Base.show(f::IO, ::MIME"image/svg+xml")` modifies glyph ids in notebooks to avoid the "Jupyter cells leak" problem ([details](https://github.com/MakieOrg/Makie.jl/issues/952#issuecomment-842413678))
+- `polyclip()`, clips one polygon with another convex polygon
+- `ispointonleftonline()`
+- `rotatepoint()` as a clearer name for `rotate_point_around_point()` (thanks @gantz-giraffe)
 
 ### Changed
-
-- changed precompile.jl to use SnoopPrecompile
-- `hexspiral()` now counts from 1 not 0 (or 2)
-- fixed positioning bug in `textpath()`
-- placing images now uses premultiplied alpha value
-- fixed bug in `pointcrossesboundingbox()`
-
-### Removed
+- `precompile.jl` switched to use SnoopPrecompile
+- `hexspiral()` now counts from 1, not 0 or 2
+- Fixed positioning bug in `textpath()`
+- Placing images now uses premultiplied alpha value
+- Fixed bug in `pointcrossesboundingbox()`
 
 ### Deprecated
+- `rotate_point_around_point()` — use `rotatepoint()` instead
 
-- `rotate_point_around_point()` is now `rotatepoint()`
-# ───────────────────────────────────────────────────
+---
 
-## [v3.5.0] - 2022-07-28 10:15
+## [v3.5.0] - 2022-07-28
 
 ### Added
-
-- drawing image buffer and drawing indices (thanks @oheil!)
-
-- thread safety (thanks @oheil!)
-
-- action dispatcher (thanks @ArbitRandomUser!)
+- Drawing image buffer and drawing indices (thanks @oheil)
+- Thread safety (thanks @oheil)
+- Action dispatcher (thanks @ArbitRandomUser)
 
 ### Changed
+- Fixed `hexspiral` to work on v1.7 and earlier
+- Adapted to changes made in MathTeXEngine release 0.5.0
 
-- fixed hexspiral to work on v1.7 and earlier
+---
 
-- some work to adapt to changes made in MathTeXEngine release 0.5.0
+## [v3.4.0] - 2022-07-13
+
+### Added
+- `BoundingBox()` can be used on Tables and table cells (needs tests)
+- Hexagon constructors
+
+### Changed
+- Fixed `drawpath()` straight lines (thanks @jules)
+- Added return values for some path functions
+- Fixed obscure bug in `polyportion()` for closed polygons
 
 ### Removed
+- Some old unused code
 
-### Deprecated
+---
 
-# ───────────────────────────────────────────────────
-
-## [v3.4.0] - 2022-07-13 09:01:18
-
-### Added
-
-- BoundingBox() can be used on Tables and table cells (needs tests)
-
-- hexagon constructors 
+## [v3.3.0] - 2022-06-01
 
 ### Changed
-
-- fix `drawpath()` straight lines (thanks @jules for spotting this!)
-
-- add return values for some path functions
-
-- fixed obscure bug in `polyportion()` if polygons were closed
-
-### Removed
-
-- some old unused stuff
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v3.3.0] - 2022-06-01 11:28:44
-
-### Added
-
-### Changed
-
-- `textfit()` algorithm revisited; it's quicker, at least....
+- `textfit()` algorithm revisited; quicker now
 - `polymorph()` keywords changed
 - `polymorph()` can now also morph between open polygons
-- minimum Julia version is now 1.6
-- there are still bugs/edgecases in `polyhull()` which I can't find/fix
-- docs now built on Linux (for LaTeX purposes)
+- Minimum Julia version is now 1.6
+- Docs now built on Linux (for LaTeX purposes)
 
 ### Removed
+- Support for Julia v1.3; minimum version is now Julia 1.6
 
-- support for Julia v1.3, minimum version is now Julia 1.6.
+---
 
-### Deprecated
-
-# ───────────────────────────────────────────────────
-## [v3.2.0] - 2022-04-05 09:41:54
+## [v3.2.0] - 2022-04-05
 
 ### Added
-
-- first attempt at `polymorph()`
-- `hcat()` and `vcat()` can join SVG drawings (thanks @davibarreira!)
-- yet another method for `perpendicular()`
+- First attempt at `polymorph()`
+- `hcat()` and `vcat()` can join SVG drawings (thanks @davibarreira)
+- Another method for `perpendicular()`
 
 ### Changed
+- Check for problematic corners in `polysmooth()` (thanks @arbitrandomuser)
+- More LaTeX characters supported (thanks @davibarreira)
+- Fixed bug in `ngon()`-vertices-reversepath
+- `BoundingBox(path)` calculates more precisely (fixes #213)
 
-- check for dodgy corners in `polysmooth()` (thanks @arbitrandomuser!)
-- even more LaTeX characters (thanks @davibarreira!)
-- bug in ngon()-vertices-reversepath fixed
-- `BoundingBox(path)` calculates boundingbox more precisely (fixes #213)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v3.1.1] - 2022-03-06
 
-### Added
-
 ### Changed
+- Fixed imports in `latex.jl`
 
-- imports in latex.jl
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v3.1.0] - 2022-02-26
 
 ### Added
-
-- drawpath() progressive path drawing
-- trimbezier() and splitbezier()
-- pathsample() like polysample() for paths, but different
-- more LaTeX characters (thanks @davibarreira!)
-- AbstractPoint (thanks Giovanni @gpucce!)
+- `drawpath()` progressive path drawing
+- `trimbezier()` and `splitbezier()`
+- `pathsample()`, like `polysample()` but for paths
+- More LaTeX characters (thanks @davibarreira)
+- `AbstractPoint` (thanks @gpucce)
 
 ### Changed
+- Docs now force-push to gh-pages
+- LaTeX text strings can also be paths (except new LaTeX characters)
+- Tidier Bezier arrows; may fix #200
 
-- docs now forcepush to gh-pages
-- latex text strings can also be paths (except the new LaTeX characters)
-- Bezier arrows are now a bit tidier might fix #200
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v3.0.0] -  2022-01-23
+## [v3.0.0] - 2022-01-23
 
 ### Added
-
-- dependency on LatexStrings
-
+- Dependency on LatexStrings
 - `Luxor.get_current_hue()` and `Luxor.get_current_color()`
 
 ### Changed
+- Shape-making functions such as `circle`/`ellipse`/`rect` now return useful values instead of Booleans, usable as arguments to `BoundingBox()` (for @TheCedarPrince)
+- Switched to the Graham Scan algorithm for `polyhull()`
+- Allow user to change tolerance for `isapprox()`
+- Exported `determinant3()`
 
-- the shape-making functions such as
-  `circle`/`ellipse`/`rect` now return 'useful' values
-  instead of Booleans. These values can usually be used as
-  arguments to `BoundingBox()`. (for @TheCedarPrince :))
-
-- switched to Graham Scan algorithm for `polyhull()`
-
-- allow user to change tolerance for `isapprox()`
-
-- export `determinant3()`
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.19.0] - 2022-01-03
 
 ### Added
-
-- LaTeX strings for `text()` - amazing work by @davibarreira, @Kolaru, and @TheCedarPrince - Thanks!
-
-- leading option for `textfit()`
-
+- LaTeX strings for `text()` — work by @davibarreira, @Kolaru, and @TheCedarPrince
+- Leading option for `textfit()`
 - `BoundingBox()` for stored Path objects
+- `textonpoly()` places text along a polygon's route
 
-- `textonpoly()` can put text on the route of a polygon
+---
 
-### Changed
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
 ## [v2.18.0] - 2021-12-18
 
 ### Added
-
-- code to support VSCode
-
-- textfit() fits text inside bounding box, first attempt
-
-- polyhull() - @thecedarprince (Hi Jacob!) convinced me it was useful :)
+- Support for VSCode
+- `textfit()` fits text inside a bounding box (first attempt)
+- `polyhull()` (thanks @thecedarprince)
 
 ### Changed
-
-- method for `arc(0, 0, action)` fixes #184
-
-- bug in simplify() #186 (thanks Ole @Wikunia!)
+- Method for `arc(0, 0, action)` fixes #184
+- Fixed bug in `simplify()` #186 (thanks @Wikunia)
 
 ### Removed
+- Support for 32-bit Windows, since (r)svg doesn't work there
 
-- support for 32-bit Windows - (r)svg doesn't work
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.17.0] - 2021-11-05
 
 ### Added
-
-- Path type to hold a Cairo Path; `makepath`(), `drawpath`(), `polytopath`(), `bezierpathtopath`()
+- `Path` type to hold a Cairo path; `makepath()`, `drawpath()`, `polytopath()`, `bezierpathtopath()`
 
 ### Changed
-
-- squircle() rt keyword default bug fixed
-- textpath() method has action and alignment options
-- prettypoly() fix action keyword arg
-- pointcrossesboundingbox() fix bug (thanks @hustf!)
-- beziersegmentangles() attend to special cases
+- Fixed `squircle()` `rt` keyword default bug
+- `textpath()` gained action and alignment options
+- Fixed `prettypoly()` action keyword argument
+- Fixed `pointcrossesboundingbox()` bug (thanks @hustf)
+- `beziersegmentangles()` handles special cases
 
 ### Removed
+- Dependency on ImageMagick
 
-- dependency on ImageMagick
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.16.0] - 2021-10-07
 
-### Added
-
 ### Changed
+- Many functions now accept `action=` keyword arguments as well as positional ones
+- Adjusted `offsetpoly(... function)` algorithm
+- Added `include_first` kwarg to `polysample()`
+- Rewrote `texttrack()` so alignment works correctly
 
-- many functions can now accept `action=` keyword arguments as well as positional ones
-- offsetpoly(... function) algorithm altered (it still sucks, though :))
-- `include_first` kwarg added to `polysample()`
-- texttrack() rewritten so that the alignment works
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.15.0] - 2021-08-20
 
 ### Added
-
-- added method to randompointarray() to generate Poisson-disk-sampled points
-- initnoise() can use other RNG (thanks @JeffreyPalmer!)
-- add_mesh_patch() to add more patches to a mesh
-- setblendextend() to allow set blend (pattern) extend modes
+- Method for `randompointarray()` to generate Poisson-disk-sampled points
+- `initnoise()` can use another RNG (thanks @JeffreyPalmer)
+- `add_mesh_patch()` to add more patches to a mesh
+- `setblendextend()` to set blend (pattern) extend modes
 
 ### Changed
+- Small hyphenation fix in `textwrap()`
+- `box(pt, w, h, radii)` can specify different radii per corner
+- `rect()` and `box()` gained reversepath options
+- Added `Base.getindex(p::Point, i) = (p.x, p.y)[i]`
+- `arrow(pt, radius...)` heads better aligned to the shaft
+- `box-[top|middle|bottom]-[left|center|right]()` functions default to the drawing's bounding box
 
-- small change in hyphenation code in textwrap(), still not perfect though
-- box(pt, w, h, radii) - can specify different radii for each corner
-- rect() and box() have reversepath options
-- Base.getindex(p::Point, i) = (p.x, p.y)[i]
-- arrow(pt, radius...) - heads are hopefully better aligned to the shaft
-- box-[top|middle|bottom]-[left|center|right]() functions default to using the drawing's bbox.
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.14.0] - 2021-07-20
 
 ### Added
-
-- setstrokescale() - enable/disable stroke scaling
-- ispointonpoly() - true if point lies on polygon (default atol=10e-5)
-- tickline() - spaced points
-- rotate_point_around_point()
+- `setstrokescale()` to enable/disable stroke scaling
+- `ispointonpoly()` — true if a point lies on a polygon (default atol=10e-5)
+- `tickline()` — spaced points
+- `rotate_point_around_point()`
 
 ### Changed
+- `Drawing()` takes a boolean `strokescale` argument to enable/disable stroke scaling (thanks @JeffreyPalmer)
 
-- Drawing() takes a boolean named argument `strokescale` to enable/disable stroke scaling (thanks @JeffreyPalmer!)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.13.0] - 2021-07-06
 
 ### Added
-
-- crescent()
-- anticlockwise arrows
-- custom arrowheads
+- `crescent()`
+- Anticlockwise arrows
+- Custom arrowheads
 
 ### Changed
+- `polyportion()`/`polyremainder()` now throw an error for single-point polygons
+- `BoundingBox()` no longer fails without a drawing (returns a default value)
+- Documentation restructured along Divio's documentation framework
 
-- `polyportion()`/`polyremainder()` now throw error for single-point polys (duh)
-- BoundingBox() no longer fails if there's no drawing (returns a default value)
-- documentation restructured along divio ("grand unified theory of documentation" lines
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.12.0] - 2021-06-12
 
 ### Added
-
-- Allow alpha settings for image matrix (thanks @Sov-trotter!)
-- add dependency on FFMPEG.jl
-- add @drawsvg @savesvg
-- add `svgstring()` to obtain the SVG source of a finished SVG drawing as a string
+- Alpha settings for image matrix (thanks @Sov-trotter)
+- Dependency on FFMPEG.jl
+- `@drawsvg`, `@savesvg`
+- `svgstring()` to obtain the SVG source of a finished drawing as a string
 
 ### Changed
+- FFMPEG code now runs the bundled version from FFMPEG.jl
+- Fixed a test relying on random numbers that failed on v1.7
 
-- FFMPEG code changed to run bundled version from FFMPEG.jl
-- changed a test that used random numbers and failed on v1.7
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.11.0] - 2021-04-06
 
 ### Added
-
-- recording (`:rec` and `snapshot()`) (thanks @hustf!)
+- Recording support (`:rec` and `snapshot()`) (thanks @hustf)
 
 ### Changed
+- CI switched from Travis to `ci.yml`
+- `texttrack()` switched to `textoutlines()`
+- Fixed `beziersegmentangles()` bug
+- Fixed bug in `isarcclockwise()` (thanks @johannes-fischer)
 
-- CI now ci.yml rather than travis
-- texttrack() switch to textoutlines()
-- beziersegmentangles() bug fixed
-- bug in isarcclockwise() fixed (thanks @johannes-fischer!)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.10.0] - 2021-03-08
 
-### Added
-
 ### Changed
+- Fixed `ispolyconvex()` test
+- Fixed `anglethreepoints()` to work correctly up to 360°
+- `textoutlines()` `:center`-ed alignment brought in line with the 2.9.0 `text()` fix
+- More macros allow variables (thanks Mateusz)
 
-- ispolyconvex() test changed to work properly
-- anglethreepoints() changed to work up to 360° properly
-- `textoutlines()` :center-ed alignments brought into line with 2.9.0 text() fix
-- more macros allow variables (thanks Mateusz!)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.9.0] - 2021-02-18
 
 ### Added
-
-- ellipseinquad() ellipse bounded by quadrilateral
-- anglethreepoints() find angle formed by three points
-- ispolyconvex() test if polygon is convex
-- beziersegmentangles() construct Bézier using in out angled handles
+- `ellipseinquad()`, ellipse bounded by a quadrilateral
+- `anglethreepoints()`, find the angle formed by three points
+- `ispolyconvex()`, test if a polygon is convex
+- `beziersegmentangles()`, construct Bézier using in/out angled handles
 
 ### Changed
+- Fixed bug in `randompointarray()`
+- `text()` `:center`-ed alignment calculated more carefully, accounting for various xadvance values (text may shift slightly left vs. earlier versions)
+- BASE64 support added (thanks @fonsp)
 
-- bug in randompointarray() fixed
-- `text()` :center-ed alignments are now more carefully
-  calculated, allowing for various xadvance values. So there
-  may be a few instances where text is positioned a few
-  pixels further left compared with earlier Luxor versions.
-- BASE64 added (thanks @fonsp!)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
+---
 
 ## [v2.8.0] - 2021-02-02
 
 ### Added
-
-- Rsvg support: readsvg()
-
-### Changed
-
-- placeimage() now also accepts SVG files and SVG code (thanks guo-yong-zhi, schneiderfelipe)
-- placeimage() now also accepts a matrix of UInt32
-- minimum Julia version is 1.3
-- juliacircles() has keyword options to allow stroke/clip actions
-- algorithm for cener3pts fixed (thanks hyrodium)
-
-### Removed
-
-- support for Julia 1.0, 1.1, 1.2
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.7.0] - January 7 2021
-
-### Added
-
-- triangle functions
-- perpendicular() bisector
-- macros allow variables (thanks Mason!)
+- Rsvg support: `readsvg()`
 
 ### Changed
-
-- fixed text rotation/alignment issue (#122)
+- `placeimage()` now accepts SVG files and SVG code (thanks @guo-yong-zhi, @schneiderfelipe)
+- `placeimage()` now accepts a matrix of UInt32
+- Minimum Julia version is 1.3
+- `juliacircles()` gained stroke/clip action options
+- Fixed algorithm for `center3pts` (thanks @hyrodium)
 
 ### Removed
+- Support for Julia 1.0, 1.1, 1.2
 
-### Deprecated
+---
 
-# ───────────────────────────────────────────────────
-
-## [v2.6.0] - 12 November 2020
+## [v2.7.0] - 2021-01-07
 
 ### Added
-
-- additional methods for `offsetpoly()` for open polylines
-- image_as_matrix!() - reusable buffer
+- Triangle functions
+- `perpendicular()` bisector
+- Macros allow variables (thanks Mason)
 
 ### Changed
+- Fixed text rotation/alignment issue (#122)
 
-### Removed
+---
 
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.5.1] - September 8 2020
+## [v2.6.0] - 2020-11-12
 
 ### Added
+- Additional `offsetpoly()` methods for open polylines
+- `image_as_matrix!()`, a reusable buffer variant
+
+---
+
+## [v2.5.1] - 2020-09-08
 
 ### Changed
+- `image_as_matrix()`: reverted an accidental xy coordinate flip introduced in 2.5.0
 
-- image_as_matrix(): reverted accidental flip of xy coordinates introduced at 2.5.0 (sorry everyone!)
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.5.0] - September 6 2020
+## [v2.5.0] - 2020-09-06
 
 ### Added
-
-- getworldposition()
-- polycross()
+- `getworldposition()`
+- `polycross()`
 
 ### Changed
-
-- docs use JuliaMono
-- in a few functions (eg `sector`, `box`) a `:clip` action didn't work, because it was applied within a
-`gsave()`/`grestore()` block. `:clip` actions should now work, as they're applied after.
+- Docs use JuliaMono
+- Fixed `:clip` action in functions like `sector`/`box` that previously failed inside a `gsave()`/`grestore()` block; `:clip` actions now applied after
 
 ### Removed
+- Some old deprecations
 
-- some old deprecations finally gone
+---
 
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.4.0] - August 13 2020
+## [v2.4.0] - 2020-08-13
 
 ### Added
-
-- get_fontsize() - thanks Ole!
-- currentdrawing() function to return the current drawing if there is one
+- `get_fontsize()`
+- `currentdrawing()` to return the current drawing, if any
 
 ### Changed
+- Fixed `show()` for new `Drawing()` (e.g. in the REPL)
+- `background()` now preserves graphics state
+- Fixed alpha bugs in `imagematrix()`
 
-- show() fixed for new Drawing() eg in REPL
-- background() preserves graphics state
-- imagematrix() bugs in alpha fixed hopefully
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.3.0] - August 1 2020
-
-### Added
+## [v2.3.0] - 2020-08-01
 
 ### Changed
+- Imagematrix functions now return the permuted matrix
+- Fixed `pointlinedistance()` to return correct results (thanks Paul)
 
-- imagematrix functions return the permuted matrix now
+---
 
-- pointlinedistance() now returns the correct results (thanks Paul!)
-
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.2.1] - patch 14 July 2020
+## [v2.2.1] - 2020-07-14
 
 ### Added
-
-- precompile()
+- `precompile()`
 
 ### Changed
+- Fixed `circlecircleinnertangents()` edge case
 
-- fix circlecircleinnertangents() edge case
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.2.0] - 2 July 2020
+## [v2.2.0] - 2020-07-02
 
 ### Added
-
 - `currentpoint()`, `has_current_point()`
 - `pointcircletangent()`
 - `circlecircleoutertangents()`
 - `circlecircleinnertangents()`
 
-### Changed
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.1.0] - 2020 June 18
+## [v2.1.0] - 2020-06-18
 
 ### Added
-
-- `julialogo()` centered option
-- `tidysvg()` function to hack glyphnames in SVG files
-  (probably a temporary thing)
-- support for Pluto
+- Centered option for `julialogo()`
+- `tidysvg()` to hack glyph names in SVG files (probably temporary)
+- Support for Pluto
 
 ### Changed
+- Document handling code (for Pluto support)
+- `julialogo()` tweaks to allow `:path` action
+- `@svg` rendering modified (no glyphname hacking)
 
-- document handling code (cf Pluto support)
-- `julialogo()` tweaks to allow :path action
-- @svg rendering modified (eg no glyphname hacking done)
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v2.0.0] - 2020 May 30
+## [v2.0.0] - 2020-05-30
 
 ### Added
-
-- arrow decorations
-- :image type, image_as_matrix(), @imagematrix to convert current vector drawing to matrix
+- Arrow decorations
+- `:image` type, `image_as_matrix()`, `@imagematrix` to convert the current vector drawing to a matrix
 
 ### Changed
-
-- some `:nothing`s replaced with `:none`s
-- fixed some `box` bugs, when they were drawn when they shouldn't have been
-
-### Removed
+- Some `:nothing`s replaced with `:none`s
+- Fixed `box` bugs where boxes were drawn when they shouldn't be
 
 ### Deprecated
+- `bars()` — use `barchart()` instead
 
-- `bars()` - use `barchart()`
+---
 
-# ───────────────────────────────────────────────────
-
-## [v1.12.0] - 2020 May 4
+## [v1.12.0] - 2020-05-04
 
 ### Added
-
 - `startnewpath` option for `textoutlines()`
 - `unique` defined for Points
-- Travis/Appveyor cache
-- GIFs preview in Juno
+- Travis/Appveyor caching
+- GIF preview in Juno
 
 ### Changed
+- Attempted to keep arrow shafts from sticking out of arrowheads
+- Internals of `rule` no longer use sets
 
-- attempt to make arrow shafts not stick out of arrow heads
-- internals of rule doesn't use sets any more
+---
 
-### Removed
-
-### Deprecated
-
-# ───────────────────────────────────────────────────
-
-## [v1.11.0] - 2020 February 18
-
-- changed compatibility versions in Project.toml (Colors/Cairo)
+## [v1.11.0] - 2020-02-18
 
 ### Added
+- Add/subtract `Point` and related arithmetic improvements
 
-- add/subtract Point to
+### Changed
+- Changed compatibility versions in Project.toml (Colors/Cairo)
+
+---
+
+## [v0.8.0] - 2017-02-17
+
+- Compositing and miscellaneous additions
+- Some changes for v0.6
+
+---
+
+## [v0.7.5] - 2017-01-26
+
+- Tests pass on Windows
+- Minor additions, e.g. hypotrochoids, another ellipse method
+
+---
+
+## [v0.7.1] - 2017-01-05
+
+- Fixed docs on Travis to build the way they should have been
+
+---
+
+## [v0.7.0] - 2016-12-12
+
+- Documentation updates
+
+---
+
+## [Unreleased] - 2014-11-24
+
+- First commit

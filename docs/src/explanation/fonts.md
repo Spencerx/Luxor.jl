@@ -6,7 +6,7 @@ end
 
 # Fonts available on Linux CI systems
 
-When this docmnent is built on Github CI, the following fonts are available.
+When this document is built on Github CI, the following fonts were available.
 
 ```@raw html
 <details closed><summary>Code for this figure</summary>

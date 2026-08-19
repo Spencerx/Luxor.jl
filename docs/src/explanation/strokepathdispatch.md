@@ -1,40 +1,48 @@
 # Custom behavior for strokepath and fillpath
 
-There are four functions that "paint" the current path to the drawing:
-they are `strokepath` , `strokepreserve` , `fillpath`, and `fillpreserve`.
-Other mechanisms to draw on the canvas are `clip` , `clippreserve` and `paint`.
-(`text` is another function that draws on the canvas but is not considered here)
+You can customize the behvaiour of the functions that "paint" the current path to the drawing, such as `strokepath` , `strokepreserve` , `fillpath`, and `fillpreserve`.
 
-If you would like to have some custom behavior for these functions, such as adding a way to extract or modify paths etc.), Luxor provides a way to do so.
+Luxor provides a way to add some custom behaviour to the standard operation of these functions. 
 
-These four functions are basically defined as:
+Internally, these four functions are defined so that they can be connected to a different function using a `dispatcher` facility. For example, the Luxor function `fillpath()` is defined as:
 
-`funcname() = funcname(DISPATCHER[1])`
-`funcname(::DefaultLuxor) = {...do_some_graphics_work...}`
-`funcname(::LDispatcher) = funcname(DefaultLuxor())`
+```julia
+fillpath() = fillpath(DISPATCHER[1])
+fillpath(::DefaultLuxor) = Cairo.fill(_get_current_cr())
+fillpath(::LDispatcher) = fillpath(DefaultLuxor())
+```
 
-`DISPATCHER[1]` is defined as an instance of a struct (with no fields)
-`DefaultLuxor`. The datatype `DefaultLuxor` is a subtype of `LDispatcher`.
-`DISPATCHER` as such is defined as an array of `LDispatcher`. This is to make
-it mutable. Only the first element ie. `DISPATCHER[1]` is ever used.
+`DISPATCHER[1]` is defined as an instance of a struct (with no fields) `DefaultLuxor`. 
 
-You can make custom behavior for the functions in the following way:
+The datatype `DefaultLuxor` is a subtype of `LDispatcher`.
+
+`DISPATCHER` as such is defined as an array of `LDispatcher`. 
+This is to make it mutable. Only the first element
+i.e. `DISPATCHER[1]` is ever used.
+
+To add some custom behavior for these functions, do the following:
 
 1. Define a new struct `MyDispatcher <: Luxor.LDispatcher` (it needn't have any fields).
 
-2. Define a function that dispatches on the above struct.
+2. Define the function that dispatches on the above struct and 
+does what you want it to do.
 
-3. Change `Luxor.DISPATCHER[1]` to an instance of your struct.
+3. Finally, change `Luxor.DISPATCHER[1]` to an instance of your struct.
 
-Here's an example of a method that changes the behavior of all calls
-to `strokepath()` such that the current color is printed to the terminal as the path is drawn.
+Here's an example that changes the behavior of all calls
+to `strokepath()` such that the current color is printed to the terminal just before each path is stroked.
 
 ```julia
 struct MyDispatcher <: Luxor.LDispatcher end
+
+# define your own strokepath() function
 function Luxor.strokepath(::MyDispatcher)
+    # new behavior 
     println("$(Luxor.get_current_color())")
+    # you can call the default behavior too
     return Luxor.strokepath(Luxor.DefaultLuxor())
 end
+
 Luxor.DISPATCHER[1] = MyDispatcher()
 
 @draw begin
@@ -45,9 +53,9 @@ Luxor.DISPATCHER[1] = MyDispatcher()
 end
 ```
 
-Now, all calls to `strokepath()` whether explicitly called or through other
-functions (for example, with the :stroke action) will print the current color
-just before the path is stroked.
+Now, all calls to `strokepath()` - whether explicitly called 
+or through other functions (for example, with the `:stroke` action) -
+will print the current color in the REPL just before the path is stroked.
 
 Similar dispatches can be written for `strokepreserve`, `fillpath`,
 `fillpreserve`, `clip`, `clippreserve`, and `paint`.

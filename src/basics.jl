@@ -78,7 +78,7 @@ rescale(x, from::NTuple{2,Number}, to::NTuple{2,Number}; easingfunction=easingfl
     background(col::Colors.Colorant)
 
 Paint the drawing (or the current clipping region, if there is one) with the
-`color``. Previously-drawn graphics will be wholly or partly obscured depending on
+`color`. Previously-drawn graphics will be wholly or partly obscured depending on
 the opacity of the color.
 
 Returns a tuple `(r, g, b, a)` of the color that was used to paint the background.
@@ -129,10 +129,27 @@ function background(col::Colors.Colorant)
     return (r, g, b, a)
 end
 
+"""
+    background(s::T) where {T<:AbstractString}
+
+Paint the drawing (or the current clipping region, if there is one) with the
+color `s`. `s` is one of the more than 600 color names defined in Colors.jl's `named_colors` dictionary,
+such as "red", "green", "darkorchid", "chocolate", "deeppink2", "mediumpurple2" among many others.
+
+Returns a tuple `(r, g, b, a)` of the color that was used to paint the background.
+"""
 function background(col::T) where {T<:AbstractString}
     return background(parse(Colorant, col))
 end
 
+"""
+    background(r, g, b, a = 1)
+
+Paint the drawing (or the current clipping region, if there is one) with the
+color RGBA(`r`, `g`, `b`, `a`).
+
+Returns a tuple `(r, g, b, a)` of the color that was used to paint the background.
+"""
 function background(r, g, b, a = 1)
     return background(RGBA(r, g, b, a))
 end

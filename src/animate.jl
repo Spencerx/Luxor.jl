@@ -49,7 +49,47 @@ make the output file name. The range defaults to `1:250`.
 """
 Movie(width, height, movietitle::AbstractString) = Movie(width, height, movietitle, 1:250)
 
-"""default linear transition - no easing, no acceleration"""
+"""
+    lineartween(t, b, c, d)
+
+Calculate a linearly interpolated ("tweened") value at time `t`, 
+for a value changing steadily from `b` to `b + c` over duration `d`.
+
+This is a linear easing function, 
+part of a family of tweening functions 
+commonly used to animate a value 
+smoothly over time.
+
+# Arguments
+
+- `t`: the current time (elapsed since the start) 
+Typically `0 <= t <= d`.
+
+- `b`: the beginning value
+
+- `c`: the total change in value (ie `end value - b`).
+
+- `d`: the duration of the tween (the value of `t` on completion.
+
+# Returns
+
+The interpolated value at time `t`, calculated as 
+`b + c * (t / d)`. When `t == 0` this 
+returns `b`; when `t == d` this returns `b + c`.
+
+# Example
+
+```julia-repl
+julia> lineartween(5, 20, 100, 10)
+70.0
+```
+
+Here, the time is 5, ie ½-way between 0 and 10. 20 + (½ * 100) is 70.
+
+See also: other tweening/easing functions for non-linear 
+transitions, such as `easeincirc()`, `easeincubic()`, 
+`easeinexpo()`, `easeinoutcirc()`, `easeinoutcubic()`, and similar.
+"""
 function lineartween(t, b, c, d)
    return c * t/d + b
 end
@@ -59,7 +99,7 @@ end
 
 The Scene type defines a function to be used to render a range of frames in a movie.
 
-- the `movie` created by Movie()
+- the `movie` created by `Movie()`
 - the `framefunction` is a function taking two arguments: the scene and the framenumber.
 - the `framerange` determines which frames are processed by the function. Defaults to the entire movie.
 - the optional `easingfunction` can be accessed by the framefunction to vary the transition speed
@@ -78,7 +118,7 @@ end
         easingfunction=easinoutquad,
         optarg=nothing)
 
-Use the Scene() constructor function to create a scene. Supply a movie, a function
+Use the `Scene()` constructor function to create a scene. Supply a movie, a function
 to generate the scene, and a range of frames. Optionally you can supply an
 easing function, and other information, in `optarg`, which can be accessed as
 `scene.opts`.
@@ -131,7 +171,7 @@ end
         pathname = "",
         tempdirectory = "")
 
-Create all the frames of the `movie``, using the array of scenes
+Create all the frames of the `movie`, using the array of scenes
 defined in `scenelist`.
 
 If `creategif` is `true`, also create an animated GIF (".gif").

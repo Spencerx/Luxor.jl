@@ -188,13 +188,25 @@ Set the color to a gray level of `n`, where `n` is between 0 and 1.
 setgray(n) = sethue(n, n, n)
 setgrey(n) = setgray(n)
 
-""" sethue() returns the current RGB color """
+""" 
+    sethue() 
+    
+Returns the current RGB color. 
+"""
 sethue() = RGB(first(Luxor._get_current_color(), 3)...)
 
-""" setcolor() returns the current RGBA color """
+"""
+    setcolor()
+    
+Returns the current RGBA color.
+"""
 setcolor() = get_current_color()
 
-""" setopacity() returns the current opacity value """
+""" 
+    setopacity() 
+    
+Returns the current opacity value.
+"""
 setopacity()  = last(_get_current_color())
 
 """
